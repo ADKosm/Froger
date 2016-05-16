@@ -1,0 +1,13 @@
+<div class="media-left" style="padding-right: 20px;">
+    <a ng-href="#/">
+        <img ng-src="{{post.image}}" ng-show="post.image" class="media-object prew-img">
+    </a>
+</div>
+<div class="media-body">
+    <h4 class="media-heading">Subject: {{post.subject}} |
+        <!--<button class="btn btn-default btn-xs" ng-show="post.reply_to" post="load_reply(post)" popover-placement="bottom" uib-popover-template="'single_post.html'">replied to {{post.reply_to}}</button>-->
+        <reply-to-button post="post" ng-show="post.reply_to"></reply-to-button>
+        <reply-button post="post">Reply</reply-button>
+    </h4>
+    {{post.text}}
+</div>

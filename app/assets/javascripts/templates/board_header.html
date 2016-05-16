@@ -1,0 +1,15 @@
+<div class="row-fluid">
+    <div class="col-md-2">
+        <logo></logo>
+    </div>
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">Board: {{board.full_name}} <span ng-show="tread"> / Thread:  {{tread.name}}</span> </div>
+            <div class="panel-body">
+                {{board.description}}
+                <br><br>
+                <start-tread-button></start-tread-button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+asset 'angular'
+asset 'angular-bootstrap'
+asset 'angular-route'
+asset 'angular-resource'
+asset 'angular-flash'
+asset 'angular-upload'
+asset 'bootstrap-sass-official'

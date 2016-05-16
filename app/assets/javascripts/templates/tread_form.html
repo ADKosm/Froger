@@ -1,0 +1,22 @@
+<div>
+    <form novalidate>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" placeholder="Name" ng-model="new_tread.name">
+        </div>
+
+        <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" class="form-control" placeholder="Subject" ng-model="new_tread.subject">
+        </div>
+
+        <div class="form-group">
+            <label for="text">Text</label>
+            <textarea type="text" class="form-control" placeholder="Text" ng-model="new_tread.text"></textarea>
+        </div>
+
+        <input type="file" file="file">
+
+        <input type="submit" value="Send" class="btn btn-default" ng-click="upload()">
+    </form>
+</div>

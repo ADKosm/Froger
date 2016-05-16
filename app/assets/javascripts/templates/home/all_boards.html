@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="col-md-3" ng-repeat="column in boards">
+        <ul>
+            <li ng-repeat="item in column" style="padding: 10px;">
+                <a ng-href="{{funcs.link_to_board(item)}}">/{{item.name}}/ - {{item.full_name}}</a>
+            </li>
+        </ul>
+    </div>
+</div>

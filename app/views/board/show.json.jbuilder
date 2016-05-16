@@ -1,0 +1,1 @@
+json.(@board, :name, :full_name, :description)

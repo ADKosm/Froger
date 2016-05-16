@@ -4,10 +4,10 @@
 
             <div class="media">
                 <div class="media-body">
-                    <h3 class="media-heading">Tread: {{tread.name}}</h3>
+                    <h3 class="media-heading">Tread: <a ng-href="{{funcs.link_to_tread(tread)}}">{{tread.name}}</a></h3>
                 </div>
 
-                <single-post post="tread.posts[0]"></single-post>
+                <single-post post="tread.base_post"></single-post>
 
             </div>
 

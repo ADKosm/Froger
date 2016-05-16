@@ -7,7 +7,7 @@
         'angular-flash.service',
         'angular-flash.flash-alert-directive',
         'ui.bootstrap',
-        'lr.upload'
+        'ngFileUpload'
     ]);
 
     app.config(['$routeProvider', function($routeProvider){

@@ -15,7 +15,7 @@
             <textarea type="text" class="form-control" placeholder="Text" ng-model="new_tread.text"></textarea>
         </div>
 
-        <input type="file" file="file">
+        <div class="button btn btn-info" ngf-select ng-model="new_tread.file" ngf-pattern="'image/*'" ngf-accept="'image/*'">Select file</div>
 
         <input type="submit" value="Send" class="btn btn-default" ng-click="upload()">
     </form>

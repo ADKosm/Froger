@@ -17,5 +17,5 @@
 //= require angular-rails-templates
 //= require angular-flash/dist/angular-flash
 //= require angular-bootstrap/ui-bootstrap-tpls
-//= require angular-upload/angular-upload
+//= require ng-file-upload/ng-file-upload
 //= require_tree .

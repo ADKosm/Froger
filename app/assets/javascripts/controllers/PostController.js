@@ -33,9 +33,11 @@
             },
             templateUrl: 'reply_button.html',
             link: function(scope, element, attrs) {
-                scope.new_post = {}
+
+                scope.new_post = {};
                 scope.upload = function() {
-                    funcs.uploadPost(scope.new_post, scope.file)
+                    scope.new_post.reply_to = scope.post.id;
+                    funcs.uploadPost(scope.new_post);
                 };
             }
         };

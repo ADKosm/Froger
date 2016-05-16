@@ -1,6 +1,18 @@
 Rails.application.routes.draw do
   root 'home#index'
 
+  get 'boards/list' => 'board#list'
+
+  get '/boards/show/:board_id' => 'board#show'
+
+  get '/boards/treads/:board_id' => 'board#treads'
+
+  post '/boards/treads/:board_id/create' => 'tread#create'
+
+  post '/treads/posts/:post_id/create' => 'post#create'
+
+  get '/treads/show/:tread_id' => 'tread#show'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

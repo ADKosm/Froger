@@ -1,68 +1,48 @@
 (function(){
     var controllers = angular.module('controllers');
 
-    controllers.service('funcs', ['$http', function($http){
+    controllers.service('funcs', ['$http', '$location', '$route', 'Upload', function($http, $location, $route, Upload){
         this.link_to_board = function(board) { return '#'.concat("/", board.name) };
-        this.link_to_tread = function(tread) { return '#'.concat("/", tread.board_name, "/", tread.id) }
+        this.link_to_tread = function(tread) { return '#'.concat("/", tread.board_id, "/", tread.id) }
 
         this.load_reply = function(post) {
             return {id: 7, subject: 'Helloo', text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.",
                 image: 'http://img.artlebedev.ru/;-)/raisin.gif', reply_to: 2}; //TODO: get data from back-end
         };
 
-        this.uploadPost = function(post, file) {
-            $http({
-                method: 'POST',
-                url: '/upload-post',
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
+        this.uploadPost = function(post) {
+            
+            Upload.upload({
+                url: ''.concat('/treads/posts/', post.reply_to, '/create'),
                 data: {
-                    subject: post.subject,
-                    text: post.text,
-                    image: file
-                },
-                transformRequest: function (data, headersGetter) {
-                    var formData = new FormData();
-                    angular.forEach(data, function (value, key) {
-                        formData.append(key, value);
-                    });
-
-                    return formData;
+                    file: post.file,
+                    'subject': post.subject,
+                    'text': post.text,
+                    'reply_to': post.reply_to
                 }
-            }).success(function (data) {
-                alert("It is a success!");
-            }).error(function (data, status) {
-                alert('Something wenr wrong!');
+            }).then(function (resp) {
+                $location.path(''.concat('/', resp.data.board_id, '/', resp.data.id));
+            }, function (resp) {
+                alert("Something went wrong!");
             });
         };
 
-        this.uploadTread = function(tread, file) {
-            $http({
-                method: 'POST',
-                url: '/upload-tread', //TODO: change to real urls
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-                data: {
-                    name: tread.name,
-                    subject: tread.subject,
-                    text: tread.text,
-                    image: file
-                },
-                transformRequest: function (data, headersGetter) {
-                    var formData = new FormData();
-                    angular.forEach(data, function (value, key) {
-                        formData.append(key, value);
-                    });
+        this.uploadTread = function(tread) {
 
-                    return formData;
+            Upload.upload({
+                url: ''.concat('/boards/treads/', tread.board_id, '/create'),
+                data: {
+                    file: tread.file,
+                    'name': tread.name,
+                    'subject': tread.subject,
+                    'text': tread.text
                 }
-            }).success(function (data) {
-                alert("It is a success!");
-            }).error(function (data, status) {
-                alert('Something wenr wrong!');
+            }).then(function (resp) {
+                $route.reload();
+            }, function (resp) {
+                alert("Something went wrong!");
             });
+
         };
 
         this.loadLogo = function(scope) {

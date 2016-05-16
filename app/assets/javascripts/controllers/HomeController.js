@@ -1,25 +1,14 @@
 (function(){
     var controllers = angular.module('controllers');
 
-    controllers.controller('HomeController', ['$scope', 'funcs', function($scope, funcs){
+    controllers.controller('HomeController', ['$scope', '$resource', 'funcs', function($scope, $resource, funcs){
         $scope.funcs = funcs;
 
-        $scope.boards = [
-            [
-                {name: "h", full_name: 'Hello'},
-                {name: "h", full_name: 'Hello'},
-                {name: "h", full_name: 'Hello'},
-                {name: "h", full_name: 'Hello'},
-                {name: "h", full_name: 'Hello'},
-                {name: "h", full_name: 'Hello'}],
-            [
-                {name: "h", full_name: 'Hello'},
-                {name: "h", full_name: 'Hello'},
-                {name: "h", full_name: 'Hello'},
-                {name: "h", full_name: 'Hello'},
-                {name: "h", full_name: 'Hello'},
-                {name: "h", full_name: 'Hello'}]
-        ];
+        var boardList = $resource('/boards/list.:format', {format: 'json'}, { get: {method: 'GET', isArray: true} });
+
+        boardList.get({}, function(list){
+            $scope.boards = list;
+        });
 
         $scope.commented_treads = [
             {board_name: 'h', name: 'Its a name of thread', id:71},

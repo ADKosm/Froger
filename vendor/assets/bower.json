@@ -6,7 +6,8 @@
     "angular-route": "latest",
     "angular-resource": "latest",
     "angular-flash": "latest",
-    "angular-upload": "latest",
+    "ng-file-upload-shim": "latest",
+    "ng-file-upload": "latest",
     "bootstrap-sass-official": "latest"
   }
 }

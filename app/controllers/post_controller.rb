@@ -7,6 +7,8 @@ class PostController < ApplicationController
     tread = Post.find(params[:reply_to]).tread
     @post.tread_id = tread.id
     @post.save
+    tread.updated_at = @post.created_at
+    tread.save
 
     render json: tread
   end

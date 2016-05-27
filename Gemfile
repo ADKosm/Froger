@@ -27,6 +27,8 @@ gem 'bower-rails'
 gem 'angular-rails-templates'
 
 gem "paperclip", "~> 4.3"
+
+gem 'impressionist'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

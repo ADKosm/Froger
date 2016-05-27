@@ -17,8 +17,6 @@
                 scope.post = data;
                 scope.$apply();
             });
-            //return {id: 7, subject: 'Helloo', text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.",
-            //    image: 'http://img.artlebedev.ru/;-)/raisin.gif', reply_to: 2}; //TODO: get data from back-end
         };
 
         this.uploadPost = function(scope) {
@@ -76,12 +74,15 @@
             })
         };
 
+        this.loadViewsNumber = function(tread, scope) {
+            var treadViews = $resource('/treads/:tread_id/views.:format', {format: 'json'});
+
+            treadViews.get({tread_id: tread.id}, function (view) {
+                scope.viewNumber = view.views;
+            })
+        };
+
         this.loadLogo = function(scope) {
-            // scope.logo_src = 'https://angularjs.org/img/AngularJS-large.png';
-            // setTimeout(function () {
-            //     scope.logo_src = "http://is4.mzstatic.com/image/thumb/Purple1/v4/9e/42/21/9e422186-d13b-b0ba-271e-5611054f67b3/mzl.tlmnhswr.jpg/0x0ss-85.jpg";
-            //     scope.$apply();
-            // }, 2000);
             scope.logo_src = "http://is4.mzstatic.com/image/thumb/Purple1/v4/9e/42/21/9e422186-d13b-b0ba-271e-5611054f67b3/mzl.tlmnhswr.jpg/0x0ss-85.jpg";
         }
 

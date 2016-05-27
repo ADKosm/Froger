@@ -10,15 +10,20 @@
             $scope.boards = list;
         });
 
-        $scope.commented_treads = [
-            {board_name: 'h', name: 'Its a name of thread', id:71},
-            {board_name: 'h', name: 'Its a name of thread', id:71},
-            {board_name: 'h', name: 'Its a name of thread', id:71},
-            {board_name: 'h', name: 'Its a name of thread', id:71}
-        ];
+        var commentedList = $resource('/treads/commented.:format', {format: 'json'}, {get: {method: 'GET', isArray: true} });
+
+        commentedList.get({}, function(list){
+            $scope.commented_treads = list;
+        });
+
+        var viewedList = $resource('/treads/viewed.:format', {format: 'json'}, {get: {method: 'GET', isArray: true} });
+
+        viewedList.get({}, function(list){
+            $scope.viewed_treads = list;
+        });
     }]);
 
-    controllers.directive('badge', function(){
+    controllers.directive('badge', ['funcs', function(funcs){
         return {
             restrict: 'A',
             scope: {
@@ -26,11 +31,21 @@
             },
             templateUrl: 'badge.html',
             link: function(scope, elements, attrs){
-                scope.comments = 2;
-                scope.views = 3; //TODO: get from back-end
+                scope.$watch('tread', function(tr){
+                    funcs.loadPostNumber(tr, scope);
+                    funcs.loadViewsNumber(tr, scope);
+                });
+                scope.$watch('postNumber', function(p){
+                    scope.comments = scope.postNumber;
+                });
+                // scope.comments = 2;
+                scope.$watch('viewNumber', function(p){
+                    scope.views = scope.viewNumber
+                });
+                // scope.views = 3; //TODO: get from back-end
             }
         };
-    });
+    }]);
 
     controllers.directive('pager', [ '$location', '$routeParams', 'funcs', function($location, $routeParams, funcs){
         return {

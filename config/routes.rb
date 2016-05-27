@@ -15,6 +15,12 @@ Rails.application.routes.draw do
 
   get '/treads/show/:tread_id' => 'tread#show'
 
+  get '/treads/commented' => 'tread#commented'
+
+  get '/treads/viewed' => 'tread#viewed'
+
+  get '/treads/:tread_id/views' => 'tread#views'
+
   get '/boards/treads/:board_id/number' => 'board#number'
 
   get '/posts/:post_id/' => 'post#show'

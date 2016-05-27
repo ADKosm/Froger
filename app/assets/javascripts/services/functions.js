@@ -83,8 +83,8 @@
         };
 
         this.loadLogo = function(scope) {
-            scope.logo_src = "http://is4.mzstatic.com/image/thumb/Purple1/v4/9e/42/21/9e422186-d13b-b0ba-271e-5611054f67b3/mzl.tlmnhswr.jpg/0x0ss-85.jpg";
-        }
+            scope.logo_src = "".concat("/logos/", Math.floor((Math.random()*10)) , ".jpg");
+        };
 
     }]);
 })();

@@ -14,8 +14,8 @@
                 image: 'http://img.artlebedev.ru/;-)/raisin.gif', reply_to: 2}; //TODO: get data from back-end
         };
 
-        this.uploadPost = function(post) {
-            
+        this.uploadPost = function(scope) {
+            var post = scope.new_post;
             Upload.upload({
                 url: ''.concat('/treads/posts/', post.reply_to, '/create'),
                 data: {
@@ -26,8 +26,10 @@
                 }
             }).then(function (resp) {
                 $location.path(''.concat('/', resp.data.board_id, '/', resp.data.id));
+                $route.reload();
             }, function (resp) {
                 alert("Something went wrong!");
+                scope.butText = 'Send';
             });
         };
 

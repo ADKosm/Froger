@@ -24,7 +24,7 @@
         };
     }]);
 
-    controller.directive('replyButton', ['funcs', function(funcs){
+    controller.directive('replyButton', ['$sce', 'funcs', function($sce, funcs){
         return {
             restrict: 'E',
             transclude: true,
@@ -34,10 +34,12 @@
             templateUrl: 'reply_button.html',
             link: function(scope, element, attrs) {
 
+                scope.butText = 'Send';
                 scope.new_post = {};
                 scope.upload = function() {
                     scope.new_post.reply_to = scope.post.id;
-                    funcs.uploadPost(scope.new_post);
+                    scope.butText = '\u23F3';
+                    funcs.uploadPost(scope);
                 };
             }
         };

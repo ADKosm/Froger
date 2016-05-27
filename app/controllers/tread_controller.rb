@@ -13,6 +13,15 @@ class TreadController < ApplicationController
   end
 
   def show
+    @postOffset = params[:page].to_i
     @tread = Tread.find(params[:tread_id])
   end
+
+  def number
+    render json: {
+        number: Tread.find(params[:tread_id]).post.count-1,
+        limit: Post.limit
+    }
+  end
+
 end

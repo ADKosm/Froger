@@ -11,7 +11,11 @@ Rails.application.routes.draw do
 
   post '/treads/posts/:post_id/create' => 'post#create'
 
+  get '/treads/posts/:tread_id/number' => 'tread#number'
+
   get '/treads/show/:tread_id' => 'tread#show'
+
+  get '/boards/treads/:board_id/number' => 'board#number'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

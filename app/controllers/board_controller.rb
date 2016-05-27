@@ -9,6 +9,15 @@ class BoardController < ApplicationController
 
   def treads
     @board = Board.find(params[:board_id])
-    @treads = @board.tread.limit(5).order(updated_at: :desc)
+    @limit = Tread.limit
+    @offset = params[:page].to_i
+    @treads = @board.tread.offset(@offset*@limit).limit(@limit).order(updated_at: :desc)
+  end
+
+  def number
+    render json: {
+        number: Board.find(params[:board_id]).tread.count,
+        limit: Tread.limit
+    }
   end
 end

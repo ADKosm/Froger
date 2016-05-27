@@ -1,9 +1,13 @@
 (function(){
     var controllers = angular.module('controllers');
 
-    controllers.service('funcs', ['$http', '$location', '$route', 'Upload', function($http, $location, $route, Upload){
-        this.link_to_board = function(board) { return '#'.concat("/", board.name) };
-        this.link_to_tread = function(tread) { return '#'.concat("/", tread.board_id, "/", tread.id) }
+    controllers.service('funcs', ['$http', '$location', '$resource', '$route', 'Upload', function($http, $location, $resource, $route, Upload){
+        this.link_to_board = function(board) {
+            if(board) return '#'.concat("/", board.name);
+        };
+        this.link_to_tread = function(tread) {
+            if(tread) return '#'.concat("/", tread.board_id, "/", tread.id);
+        };
 
         this.load_reply = function(post) {
             return {id: 7, subject: 'Helloo', text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.",
@@ -43,6 +47,24 @@
                 alert("Something went wrong!");
             });
 
+        };
+
+        this.loadTreadNumber = function(board, scope) {
+            var treadNumber = $resource('/boards/treads/:board_id/number.:format', {format: 'json'});
+
+            treadNumber.get({board_id: board.name}, function (number) {
+                scope.treadNumber = number.number;
+                scope.limit = number.limit;
+            })
+        };
+
+        this.loadPostNumber = function(tread, scope) {
+            var postNumber = $resource('/treads/posts/:tread_id/number.:format', {format: 'json'});
+
+            postNumber.get({tread_id: tread.id}, function (number) {
+                scope.postNumber = number.number;
+                scope.limit = number.limit;
+            })
         };
 
         this.loadLogo = function(scope) {

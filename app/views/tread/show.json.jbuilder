@@ -1,1 +1,1 @@
-json.partial! 'show_one', tread: @tread
+json.partial! 'show_one', tread: @tread, postOffset: @postOffset

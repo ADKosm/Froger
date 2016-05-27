@@ -10,7 +10,7 @@
             $scope.board = board;
         });
 
-        treadsRes.get({tread_id: $routeParams.tread_id}, function (tread) {
+        treadsRes.get({tread_id: $routeParams.tread_id, page: $routeParams.page}, function (tread) {
             $scope.tread = tread;
         });
 

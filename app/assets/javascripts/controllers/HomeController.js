@@ -14,7 +14,7 @@
             {board_name: 'h', name: 'Its a name of thread', id:71},
             {board_name: 'h', name: 'Its a name of thread', id:71},
             {board_name: 'h', name: 'Its a name of thread', id:71},
-            {board_name: 'h', name: 'Its a name of thread', id:71} // TODO: get from back-end
+            {board_name: 'h', name: 'Its a name of thread', id:71}
         ];
     }]);
 
@@ -31,6 +31,42 @@
             }
         };
     });
+
+    controllers.directive('pager', [ '$location', '$routeParams', 'funcs', function($location, $routeParams, funcs){
+        return {
+            restrict: 'E',
+            templateUrl: 'pager.html',
+            scope: {
+                board: '=board',
+                tread: '=tread'
+            },
+            link: function(scope, element, attrs) {
+                scope.$watch('board', function (board) {
+                    if(board){
+                        funcs.loadTreadNumber(board, scope);
+                    }
+                });
+                scope.$watch('tread', function(tread){
+                    if(tread){
+                        funcs.loadPostNumber(tread, scope);
+                    }
+                });
+                var setLinks = function(tr) {
+                    var limit = scope.limit;
+                    var all = scope.treadNumber || scope.postNumber;
+                    var current = parseInt($routeParams.page || 0, 10);
+
+                    var maxPage = Math.max(Math.floor(all/limit) + Math.min(1, all % limit) - 1, 0) ;
+
+                    scope.prev = "#".concat($location.path(), "?page=", Math.max(0, current - 1));
+                    scope.next = "#".concat($location.path(), "?page=", Math.min(maxPage, current+1));
+                    scope.last = "#".concat($location.path(), "?page=", maxPage);
+                };
+                scope.$watch('treadNumber', setLinks);
+                scope.$watch('postNumber', setLinks);
+            }
+        }
+    }]);
 
     controllers.directive('file', function () {
         return {

@@ -38,11 +38,9 @@
                 scope.$watch('postNumber', function(p){
                     scope.comments = scope.postNumber;
                 });
-                // scope.comments = 2;
                 scope.$watch('viewNumber', function(p){
                     scope.views = scope.viewNumber
                 });
-                // scope.views = 3; //TODO: get from back-end
             }
         };
     }]);

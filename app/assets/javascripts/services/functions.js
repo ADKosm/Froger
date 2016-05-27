@@ -9,14 +9,14 @@
             if(tread) return '#'.concat("/", tread.board_id, "/", tread.id);
         };
 
-        this.load_reply = function(scope) {
+        this.load_reply = function(post, scope) { //TODO: допиши этот ужас в нормальном виде
             var postRes = $resource('/posts/:post_id/.:format', {format: 'json'});
-            var post = scope.repPost;
-            
-            postRes.get({post_id: post.reply_to}, function (data) {
-                scope.post = data;
-                scope.$apply();
-            });
+
+            if(post && post.reply_to) {
+                postRes.get({post_id: post.reply_to}, function (data) {
+                    scope.replyPost = data;
+                });
+            }
         };
 
         this.uploadPost = function(scope) {
@@ -62,7 +62,7 @@
             treadNumber.get({board_id: board.name}, function (number) {
                 scope.treadNumber = number.number;
                 scope.limit = number.limit;
-            })
+            });
         };
 
         this.loadPostNumber = function(tread, scope) {

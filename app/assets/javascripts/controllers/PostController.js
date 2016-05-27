@@ -19,7 +19,12 @@
             },
             templateUrl: 'reply_to_button.html',
             link: function(scope, element, attrs) {
-                funcs.load_reply(scope);
+                scope.$watch('repPost', function (post) {
+                    funcs.load_reply(post, scope);
+                });
+                scope.$watch('replyPost', function (post) {
+                    scope.post = scope.replyPost;
+                })
             }
         };
     }]);

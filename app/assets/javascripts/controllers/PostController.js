@@ -19,7 +19,7 @@
             },
             templateUrl: 'reply_to_button.html',
             link: function(scope, element, attrs) {
-                scope.post = funcs.load_reply(scope.repPost);
+                funcs.load_reply(scope);
             }
         };
     }]);

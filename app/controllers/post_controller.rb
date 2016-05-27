@@ -10,4 +10,8 @@ class PostController < ApplicationController
 
     render json: tread
   end
+
+  def show
+    @post = Post.find(params[:post_id])
+  end
 end

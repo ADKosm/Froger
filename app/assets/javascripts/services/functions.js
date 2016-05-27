@@ -9,9 +9,16 @@
             if(tread) return '#'.concat("/", tread.board_id, "/", tread.id);
         };
 
-        this.load_reply = function(post) {
-            return {id: 7, subject: 'Helloo', text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.",
-                image: 'http://img.artlebedev.ru/;-)/raisin.gif', reply_to: 2}; //TODO: get data from back-end
+        this.load_reply = function(scope) {
+            var postRes = $resource('/posts/:post_id/.:format', {format: 'json'});
+            var post = scope.repPost;
+            
+            postRes.get({post_id: post.reply_to}, function (data) {
+                scope.post = data;
+                scope.$apply();
+            });
+            //return {id: 7, subject: 'Helloo', text: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.",
+            //    image: 'http://img.artlebedev.ru/;-)/raisin.gif', reply_to: 2}; //TODO: get data from back-end
         };
 
         this.uploadPost = function(scope) {

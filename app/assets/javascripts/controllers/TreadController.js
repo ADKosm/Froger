@@ -14,6 +14,14 @@
             $scope.tread = tread;
         });
 
+        // $scope.$watch('$viewContentLoaded', function(){
+        //     $('a.fullsizeble').fullsizable({
+        //         preload: false,
+        //         reloadOnOpen: true
+        //     });
+        //     alert('bhhh')
+        // });  
+
     }]);
 
     controllers.directive('treadList', [ 'funcs', function(funcs){

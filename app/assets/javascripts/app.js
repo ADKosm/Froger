@@ -26,4 +26,12 @@
 
     var controllers = angular.module('controllers', []);
 
+    app.run(function($rootScope) {
+        $rootScope.$on("$routeChangeSuccess", function(event, next, current) {
+            setTimeout(function(){
+                $('a.fullsizeble').fullsizable();
+            }, 1000);
+        });
+    });
+
 })();

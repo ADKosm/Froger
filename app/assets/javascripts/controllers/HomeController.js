@@ -21,6 +21,8 @@
         viewedList.get({}, function(list){
             $scope.viewed_treads = list;
         });
+        
+        
     }]);
 
     controllers.directive('badge', ['funcs', function(funcs){

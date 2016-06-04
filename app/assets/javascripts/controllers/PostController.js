@@ -7,7 +7,10 @@
             scope: {
                 post: '=post'
             },
-            templateUrl: 'single_post.html'
+            templateUrl: 'single_post.html',
+            link: function(scope, element, attrs) {
+                
+            }
         };
     }]);
 
